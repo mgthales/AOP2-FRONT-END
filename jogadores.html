@@ -5,68 +5,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogadores - Mundo do Futebol</title>
     <style>
-        /* Reutilizando o CSS do index.html */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Header Styles */
         header {
-            background-color: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             text-align: center;
-            padding: 0.5rem;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+
         header h1 {
-             font-size: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
         header p {
-             font-size: 0.9rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
+
+        /* Navigation */
         nav {
-            background-color: #34495e;
+            background-color: #ffffff;
             padding: 1rem;
-            text-align: right;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
+
         nav a {
-            color: white;
+            color: #1e3c72;
             text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
+
         nav a:hover {
-            color: #3498db;
+            background-color: #1e3c72;
+            color: white;
         }
+
+        /* Container */
         .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-bottom: 80px;
         }
+
+        /* Título da seção */
+        main h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        main h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        /* Cards de Jogadores */
+        .jogador {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .jogador:hover {
+            transform: translateY(-5px);
+        }
+
+        .jogador img {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .jogador-info {
+            flex: 1;
+        }
+
+        .jogador h3 {
+            font-size: 1.8rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .jogador p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Footer */
         footer {
-            background-color: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 1.5rem;
             position: fixed;
             bottom: 0;
             width: 100%;
         }
-        .jogador {
-            background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-        }
-        .jogador img {
-            max-width: 200px;
-            margin-right: 20px;
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .jogador {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .jogador img {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 20px;
+            }
+
+            nav {
+                padding: 0.5rem;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 10px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -78,6 +180,7 @@
         <a href="jogadores.html">Jogadores</a>
         <a href="contato.html">Contatos</a>
     </nav>
+
     <header>
         <h1>Mundo do Futebol</h1>
         <p>Seu portal de notícias e paixão pelo esporte mais popular do mundo</p>
@@ -88,25 +191,21 @@
             <h2>Jogadores em Destaque</h2>
             
             <div class="jogador">
-                <img src="/api/placeholder/200/250" alt="Lionel Messi">
-                <div>
-                    <h3>Lionel Messi</h3>
-                    <p>Atacante argentino, considerado um dos maiores jogadores de todos os tempos. Campeão mundial em 2022.</p>
+                <img src="https://tse3.mm.bing.net/th?id=OIP.4xAbBh3ADM-8K95RDp7q3gAAAA&pid=Api&P=0&h=180" alt="Bellingham">
+                <div class="jogador-info">
+                    <h3>Bellingham</h3>
+                    <p>Jude Bellingham (Real Madrid): Com apenas 20 anos, Bellingham já é considerado um dos melhores meio-campistas do mundo. Sua chegada ao Real Madrid foi meteórica, e ele rapidamente se tornou peça fundamental na equipe, contribuindo com gols e assistências importantes.</p>
                 </div>
             </div>
 
             <div class="jogador">
-                <img src="/api/placeholder/200/250" alt="Neymar">
-                <div>
-                    <h3>Neymar Jr.</h3>
-                    <p>Jogador brasileiro que se destaca pela técnica e criatividade, jogando atualmente no Paris Saint-Germain.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" alt="Cristiano Ronaldo">
+                <div class="jogador-info">
+                    <h3>Cristiano Ronaldo</h3>
+                    <p>Cristiano Ronaldo está de volta: depois de sair do universo do FC 100 em 2022/23 por causa de um ano terrível, no qual teve uma saída amarga do Manchester United, uma Copa do Mundo ruim e uma mudança nada animadora para a Arábia Saudita, o astro de Portugal retornou ao radar rumo à Euro 2024.</p>
                 </div>
             </div>
         </main>
     </div>
-
-    <footer>
-        <p>© 2024 Blog Mundo do Futebol - Todos os direitos reservados</p>
-    </footer>
 </body>
 </html>

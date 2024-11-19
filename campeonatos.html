@@ -5,62 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campeonatos - Mundo do Futebol</title>
     <style>
-        /* Reutilizando o CSS do index.html */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             background-color: #f4f4f4;
+            color: #333;
+            padding-bottom: 60px;
         }
         header {
-            background-color: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             text-align: center;
-            padding: 0.5rem;
+            padding: 2rem 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="5"/></svg>') center/150px;
+            opacity: 0.1;
         }
         header h1 {
-             font-size: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        header p {
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
         }
 
-        header p {
-             font-size: 0.9rem;
-        }
         nav {
-            background-color: #34495e;
+            background-color: #ffffff;
             padding: 1rem;
-            text-align: right;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
+
         nav a {
-            color: white;
+            color: #1e3c72;
             text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
+
         nav a:hover {
-            color: #3498db;
+            background-color: #1e3c72;
+            color: white;
         }
         .container {
-            width: 80%;
+            width: 90%;
+            max-width: 1200px;
             margin: auto;
-            overflow: hidden;
             padding: 20px;
         }
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        .noticias {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .noticias h2 {
+            color: #1e3c72;
+            border-bottom: 3px solid #1e3c72;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .noticia-item {
+            padding: 15px;
+            border-left: 4px solid #1e3c72;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+        .noticia-item:hover {
+            transform: translateX(10px);
+        }
+        .noticia-data {
+            color: #666;
+            font-size: 0.9rem;
         }
         .campeonato {
             background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .campeonato:hover {
+            transform: translateY(-5px);
+        }
+        .campeonato h3 {
+            color: #1e3c72;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1e3c72;
+        }
+        .campeonato p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        .curiosidade-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .curiosidade-box h4 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        table th {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        table tr:hover {
+            background-color: #f0f2f5;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 0.5rem;
+            }
+            nav a {
+                margin: 5px;
+                font-size: 0.9rem;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+            .campeonato {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -77,28 +198,148 @@
         <p>Seu portal de notícias e paixão pelo esporte mais popular do mundo</p>
     </header>
     <div class="container">
+        <section class="noticias">
+            <h2>Últimas Notícias</h2>
+            <div class="noticia-item">
+                <span class="noticia-data">19/11/2024</span>
+                <h3>Champions League: Definidos os confrontos das quartas de final</h3>
+                <p>Sorteio coloca grandes clássicos europeus frente a frente na próxima fase...</p>
+            </div>
+            <div class="noticia-item">
+                <span class="noticia-data">18/11/2024</span>
+                <h3>Brasileirão 2024: Times se reforçam para nova temporada</h3>
+                <p>Clubes anunciam contratações de peso visando o início do campeonato...</p>
+            </div>
+        </section>
+
         <main>
             <h2>Campeonatos de Futebol</h2>
-            
             <div class="campeonato">
                 <h3>Copa do Mundo FIFA</h3>
                 <p>O maior evento de futebol do planeta, realizado a cada quatro anos, reunindo as melhores seleções mundiais.</p>
+                
+                <div class="curiosidade-box">
+                    <h4>Curiosidades</h4>
+                    <ul>
+                        <li>O Brasil é o maior vencedor, com 5 títulos (1958, 1962, 1970, 1994 e 2002)</li>
+                        <li>A Argentina é a atual campeã mundial (2022)</li>
+                        <li>A Copa do Mundo de 2026 será a primeira com 48 seleções</li>
+                    </ul>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Ano</th>
+                        <th>Campeão</th>
+                        <th>Vice-Campeão</th>
+                        <th>Sede</th>
+                    </tr>
+                    <tr>
+                        <td>2022</td>
+                        <td>Argentina</td>
+                        <td>França</td>
+                        <td>Catar</td>
+                    </tr>
+                    <tr>
+                        <td>2018</td>
+                        <td>França</td>
+                        <td>Croácia</td>
+                        <td>Rússia</td>
+                    </tr>
+                    <tr>
+                        <td>2014</td>
+                        <td>Alemanha</td>
+                        <td>Argentina</td>
+                        <td>Brasil</td>
+                    </tr>
+                </table>
             </div>
 
             <div class="campeonato">
                 <h3>Liga dos Campeões da UEFA</h3>
-                <p>Competição mais prestigiada entre clubes europeus, com grandes times disputando o título continental.</p>
+                <p>A mais prestigiada competição de clubes do mundo, reunindo os melhores times europeus em confrontos emocionantes.</p>
+                
+                <div class="curiosidade-box">
+                    <h4>Curiosidades</h4>
+                    <ul>
+                        <li>O Real Madrid é o maior campeão com 14 títulos</li>
+                        <li>O Manchester City é o atual campeão (2022/23)</li>
+                        <li>A final de 2024 será em Londres, no Wembley Stadium</li>
+                    </ul>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Temporada</th>
+                        <th>Campeão</th>
+                        <th>Vice-Campeão</th>
+                        <th>Placar Final</th>
+                    </tr>
+                    <tr>
+                        <td>2022/23</td>
+                        <td>Manchester City</td>
+                        <td>Inter de Milão</td>
+                        <td>1-0</td>
+                    </tr>
+                    <tr>
+                        <td>2021/22</td>
+                        <td>Real Madrid</td>
+                        <td>Liverpool</td>
+                        <td>1-0</td>
+                    </tr>
+                    <tr>
+                        <td>2020/21</td>
+                        <td>Chelsea</td>
+                        <td>Manchester City</td>
+                        <td>1-0</td>
+                    </tr>
+                </table>
             </div>
 
             <div class="campeonato">
                 <h3>Campeonato Brasileiro</h3>
-                <p>Principal torneio nacional de clubes, reunindo os melhores times do Brasil em uma competição emocionante.</p>
+                <p>Principal competição do futebol nacional, reunindo os 20 melhores clubes do país em disputas emocionantes.</p>
+                
+                <div class="curiosidade-box">
+                    <h4>Curiosidades</h4>
+                    <ul>
+                        <li>Flamengo e Palmeiras são os maiores campeões, com 11 títulos cada</li>
+                        <li>O Palmeiras é o atual campeão (2023)</li>
+                        <li>Santos é o único clube que teve Pelé como jogador no Brasileirão</li>
+                    </ul>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Ano</th>
+                        <th>Campeão</th>
+                        <th>Vice-Campeão</th>
+                        <th>Artilheiro</th>
+                    </tr>
+                    <tr>
+                        <td>2023</td>
+                        <td>Palmeiras</td>
+                        <td>Grêmio</td>
+                        <td>Paulinho (Atlético-MG)</td>
+                    </tr>
+                    <tr>
+                        <td>2022</td>
+                        <td>Palmeiras</td>
+                        <td>Internacional</td>
+                        <td>Germán Cano (Fluminense)</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>Atlético-MG</td>
+                        <td>Flamengo</td>
+                        <td>Hulk (Atlético-MG)</td>
+                    </tr>
+                </table>
             </div>
         </main>
     </div>
-
     <footer>
-        <p>© 2024 Blog Mundo do Futebol - Todos os direitos reservados</p>
+       
     </footer>
 </body>
 </html>

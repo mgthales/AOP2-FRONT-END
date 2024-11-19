@@ -4,73 +4,224 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contatos - Mundo do Futebol</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
         header {
-            background-color: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             text-align: center;
-            padding: 0.5rem;
+            padding: 2rem 0.5rem;
+            position: relative;
+            overflow: hidden;
         }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="5"/></svg>') center/150px;
+            opacity: 0.1;
+        }
+
         header h1 {
-             font-size: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         header p {
-             font-size: 0.9rem;
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
         }
+
         nav {
-            background-color: #34495e;
+            background-color: #ffffff;
             padding: 1rem;
-            text-align: right;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #3498db;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
-        }
-        footer {
-            background-color: #2c3e50;
-            color: white;
             text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .contato-form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .contato-form input, .contato-form textarea {
+
+        nav a {
+            color: #1e3c72;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #1e3c72;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        .info-contato {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(10px);
+            background: #f0f2f5;
+        }
+
+        .info-item i {
+            margin-right: 1rem;
+            color: #1e3c72;
+        }
+
+        .redes-sociais {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .redes-sociais a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #1e3c72;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .redes-sociais a:hover {
+            transform: translateY(-5px);
+            background: #2a5298;
+        }
+
+        .contato-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
         }
-        .contato-form button {
-            background-color: #3498db;
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
             cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30,60,114,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                margin: 5px;
+                font-size: 0.9rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-item {
+                padding: 0.8rem;
+            }
+
+            .redes-sociais {
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
         }
     </style>
 </head>
@@ -82,32 +233,100 @@
         <a href="jogadores.html">Jogadores</a>
         <a href="contato.html">Contatos</a>
     </nav>
+
     <header>
         <h1>Mundo do Futebol</h1>
-        <p>Seu portal de notícias e paixão pelo esporte mais popular do mundo</p>
+        <p>Entre em contato conosco e faça parte dessa paixão!</p>
     </header>
+
     <div class="container">
-        <main>
-            <h2>Fale Conosco</h2>
-            <div class="contato-form">
-                <form>
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="mensagem">Mensagem:</label>
-                    <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
-
-                    <button type="submit">Enviar Mensagem</button>
-                </form>
+        <div class="info-contato">
+            <h2>Informações de Contato</h2>
+            <div class="info-item">
+                <i data-lucide="map-pin"></i>
+                <div>
+                    <h3>Endereço</h3>
+                    <p>Avenida Comissário José Dantas de Melo, 21 - Boa Vista II, 29102-920</p>
+                    <p>Vila Velha - ES</p>
+                </div>
             </div>
-        </main>
+
+            <div class="info-item">
+                <i data-lucide="phone"></i>
+                <div>
+                    <h3>Telefone</h3>
+                    <p>(27) 3421-2001</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <i data-lucide="mail"></i>
+                <div>
+                    <h3>E-mail</h3>
+                    <p>clube@uvv.br</p>
+                </div>
+            </div>
+
+            <div class="redes-sociais">
+                <a href="#" aria-label="Facebook">
+                    <i data-lucide="facebook"></i>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <i data-lucide="instagram"></i>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <i data-lucide="twitter"></i>
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <i data-lucide="youtube"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="contato-form">
+            <h2>Envie sua Mensagem</h2>
+            <form id="formulario-contato">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone">
+                </div>
+
+                <div class="form-group">
+                    <label for="assunto">Assunto</label>
+                    <input type="text" id="assunto" name="assunto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+                </div>
+
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </div>
     </div>
 
-    <footer>
-        <p>© 2024 Blog Mundo do Futebol - Todos os direitos reservados</p>
-    </footer>
+    
+    <script>
+        // Inicializa os ícones do Lucide
+        lucide.createIcons();
+
+        // Manipulador do formulário
+        document.getElementById('formulario-contato').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
